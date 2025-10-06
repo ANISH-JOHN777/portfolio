@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M Anish John - Web Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0c0c1e;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+        }
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            display: block;
+        }
+        .glass-panel {
+            background: rgba(14, 19, 48, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 1rem;
+        }
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .text-glow {
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+        }
+        .icon-glow {
+             filter: drop-shadow(0 0 5px rgba(56, 189, 248, 0.7));
+        }
+        /* Modal Styles */
+        #project-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        #project-modal.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        #project-modal-content {
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        #project-modal.open #project-modal-content {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <canvas id="starfield"></canvas>
+
+    <div class="relative min-h-screen container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <!-- Header / Hero Section -->
+        <header class="text-center mb-20 scroll-reveal">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-sky-300 text-glow">M ANISH JOHN</h1>
+            <p class="mt-4 text-xl sm:text-2xl text-gray-300">Web Developer & Digital Explorer</p>
+            <div class="mt-8 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 text-gray-400">
+                <div class="flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400 icon-glow"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                    <span>8072937674</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400 icon-glow"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <span>anishjohn0007@gmail.com</span>
+                </div>
+            </div>
+            <div class="mt-6 flex justify-center items-center space-x-6">
+                <a href="https://www.linkedin.com/in/m-anish-raj/" class="flex items-center space-x-2 text-sky-400 hover:text-sky-200 transition-colors" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-glow"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    <span>LinkedIn</span>
+                </a>
+                 <a href="https://github.com/ANISH-JOHN777/" class="flex items-center space-x-2 text-sky-400 hover:text-sky-200 transition-colors" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-glow"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </header>
+
+        <main class="space-y-20">
+            <!-- Sections: Mission, Skills, Experience -->
+            <section id="mission" class="glass-panel p-8 scroll-reveal">
+                <h2 class="text-2xl sm:text-3xl font-bold text-sky-300 text-glow mb-4">MISSION OBJECTIVE</h2>
+                <p class="text-gray-300 leading-relaxed">
+                    A passionate Web Developer with hands-on experience building dynamic and user-friendly websites using HTML, CSS, JavaScript, and React. I am adept at problem-solving and UI design, with a proven track record of creating real-world applications like bike rentals and billing systems. I am eager to innovate and tackle new tech challenges with a creative mindset.
+                </p>
+            </section>
+
+            <section id="skills" class="glass-panel p-8 scroll-reveal">
+                <h2 class="text-2xl sm:text-3xl font-bold text-sky-300 text-glow mb-6">TECH CONSTELLATION</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-sky-400 mb-3">Navigation & Propulsion</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-sky-900/50 text-sky-300 px-3 py-1 rounded-full text-sm">HTML</span>
+                            <span class="bg-sky-900/50 text-sky-300 px-3 py-1 rounded-full text-sm">CSS</span>
+                            <span class="bg-sky-900/50 text-sky-300 px-3 py-1 rounded-full text-sm">JavaScript</span>
+                            <span class="bg-sky-900/50 text-sky-300 px-3 py-1 rounded-full text-sm">Front End Coding</span>
+                            <span class="bg-sky-900/50 text-sky-300 px-3 py-1 rounded-full text-sm">Web Design</span>
+                             <span class="bg-sky-900/50 text-sky-300 px-3 py-1 rounded-full text-sm">WordPress</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-sky-400 mb-3">Core Systems</h3>
+                        <div class="flex flex-wrap gap-2">
+                             <span class="bg-sky-900/50 text-sky-300 px-3 py-1 rounded-full text-sm">Python</span>
+                             <span class="bg-sky-900/50 text-sky-300 px-3 py-1 rounded-full text-sm">React</span>
+                             <span class="bg-sky-900/50 text-sky-300 px-3 py-1 rounded-full text-sm">GitHub</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-sky-400 mb-3">Design Blueprints</h3>
+                         <div class="flex flex-wrap gap-2">
+                           <span class="bg-sky-900/50 text-sky-300 px-3 py-1 rounded-full text-sm">Design Thinking</span>
+                           <span class="bg-sky-900/50 text-sky-300 px-3 py-1 rounded-full text-sm">Canva</span>
+                        </div>
+                    </div>
+                     <div>
+                        <h3 class="text-xl font-semibold text-sky-400 mb-3">Automated Systems</h3>
+                        <div class="flex flex-wrap gap-2">
+                           <span class="bg-sky-900/50 text-sky-300 px-3 py-1 rounded-full text-sm">n8n Automation</span>
+                        </div>
+                    </div>
+                     <div>
+                        <h3 class="text-xl font-semibold text-sky-400 mb-3">Crew Competencies</h3>
+                         <div class="flex flex-wrap gap-2">
+                            <span class="bg-sky-900/50 text-sky-300 px-3 py-1 rounded-full text-sm">Problem-Solving</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="experience" class="glass-panel p-8 scroll-reveal">
+                <h2 class="text-2xl sm:text-3xl font-bold text-sky-300 text-glow mb-6">PROFESSIONAL VOYAGES</h2>
+                <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:h-full before:w-0.5 before:bg-sky-800/50 before:origin-top">
+                    <div class="relative pl-10">
+                        <div class="absolute -left-1.5 mt-1 h-4 w-4 rounded-full bg-sky-400 animate-pulse"></div>
+                        <h3 class="text-xl font-bold text-gray-100">Product Manager</h3>
+                        <p class="text-sky-400">Almost genius labs</p>
+                        <ul class="mt-4 list-disc list-inside text-gray-300 space-y-2">
+                            <li>Developed and maintained web applications to enhance user experience and functionality.</li>
+                            <li>Collaborated with teams to gather requirements and translate them into technical specifications.</li>
+                            <li>Managed project timelines and deliverables, ensuring on-time completion of tasks.</li>
+                        </ul>
+                    </div>
+                    <div class="relative pl-10">
+                         <div class="absolute -left-1.5 mt-1 h-4 w-4 rounded-full bg-sky-400 animate-pulse"></div>
+                        <h3 class="text-xl font-bold text-gray-100">Web Developer Intern</h3>
+                        <p class="text-sky-400">RETECH solution <span class="text-gray-400 ml-2">| May 2025</span></p>
+                        <ul class="mt-4 list-disc list-inside text-gray-300 space-y-2">
+                            <li>Developed web applications over a period of 21 days, utilizing HTML, CSS, and JavaScript.</li>
+                            <li>Engaged in projects focused on artificial intelligence for 30 days.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Stellar Projects -->
+            <section id="projects" class="scroll-reveal">
+                <h2 class="text-2xl sm:text-3xl font-bold text-sky-300 text-glow mb-6 text-center">STELLAR PROJECTS</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project Cards will be populated here -->
+                    <button data-project="blogvox" class="project-card text-left glass-panel p-6 flex flex-col h-full hover:border-sky-400/50 transition-all duration-300 transform hover:-translate-y-1">
+                        <h3 class="text-xl font-bold text-sky-400">🚀 Blogvox</h3>
+                        <p class="text-gray-400 text-sm mb-3">Sep 2025</p>
+                        <p class="text-gray-300 flex-grow">Voice-to-text blog generation with PDF export functionality.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">HTML</span>
+                            <span class="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">CSS</span>
+                            <span class="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">JavaScript</span>
+                        </div>
+                    </button>
+                    <button data-project="bikeRentals" class="project-card text-left glass-panel p-6 flex flex-col h-full hover:border-sky-400/50 transition-all duration-300 transform hover:-translate-y-1">
+                        <h3 class="text-xl font-bold text-sky-400">🚀 Bike Rentals</h3>
+                        <p class="text-gray-300 flex-grow">A peer-to-peer bike rental platform for users to list and rent bikes.</p>
+                         <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">HTML</span>
+                            <span class="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">CSS</span>
+                            <span class="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">JavaScript</span>
+                        </div>
+                    </button>
+                     <button data-project="billingPage" class="project-card text-left glass-panel p-6 flex flex-col h-full hover:border-sky-400/50 transition-all duration-300 transform hover:-translate-y-1">
+                        <h3 class="text-xl font-bold text-sky-400">🚀 Billing Page</h3>
+                        <p class="text-gray-300 flex-grow">A simple page to generate customer bills with PDF and print options.</p>
+                         <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">HTML</span>
+                            <span class="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">CSS</span>
+                            <span class="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">JavaScript</span>
+                        </div>
+                    </button>
+                     <button data-project="typingGame" class="project-card text-left glass-panel p-6 flex flex-col h-full hover:border-sky-400/50 transition-all duration-300 transform hover:-translate-y-1">
+                        <h3 class="text-xl font-bold text-sky-400">🚀 Typing Game</h3>
+                        <p class="text-gray-300 flex-grow">A small game to improve typing speed by typing falling words.</p>
+                         <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">HTML</span>
+                            <span class="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">CSS</span>
+                            <span class="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">JavaScript</span>
+                        </div>
+                    </button>
+                     <button data-project="newWay" class="project-card text-left glass-panel p-6 flex flex-col h-full hover:border-sky-400/50 transition-all duration-300 transform hover:-translate-y-1">
+                        <h3 class="text-xl font-bold text-sky-400">🚀 New Way</h3>
+                        <p class="text-gray-300 flex-grow">An interview platform with AI-powered tools for HR and candidates.</p>
+                         <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">HTML</span>
+                            <span class="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">CSS</span>
+                            <span class="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">JavaScript</span>
+                        </div>
+                    </button>
+                </div>
+            </section>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                 <!-- Launchpad (Education) -->
+                <section id="education" class="glass-panel p-8 scroll-reveal">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-sky-300 text-glow mb-6">LAUNCHPAD</h2>
+                     <div class="space-y-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-100">B-Tech, Information Technology</h3>
+                            <p class="text-sky-400">SNS College of Engineering | 2023-2027</p>
+                            <p class="text-gray-400">CGPA: 8.51</p>
+                        </div>
+                         <div>
+                            <h3 class="text-xl font-bold text-gray-100">12th Std</h3>
+                            <p class="text-sky-400">Hope School | 2023</p>
+                             <p class="text-gray-400">Percentage: 76%</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Galactic Credentials -->
+                <section id="achievements" class="glass-panel p-8 scroll-reveal">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-sky-300 text-glow mb-6">GALACTIC CREDENTIALS</h2>
+                    <div class="space-y-4">
+                         <div>
+                            <h3 class="text-xl font-bold text-gray-100">Certifications</h3>
+                            <p class="text-gray-300">Web Development, Full Stack Web Development</p>
+                        </div>
+                         <div>
+                            <h3 class="text-xl font-bold text-gray-100">Publications</h3>
+                            <p class="text-gray-300">IJARESM Publication</p>
+                        </div>
+                         <div>
+                            <h3 class="text-xl font-bold text-gray-100">Extracurricular Missions</h3>
+                            <p class="text-gray-300">State level in Hockey, District level in Football</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+        
+        <footer class="text-center mt-20 text-gray-500 text-sm">
+            <p>&copy; 2025 M Anish John. All systems operational.</p>
+        </footer>
+    </div>
+    
+    <!-- Project Modal -->
+    <div id="project-modal">
+        <div id="project-modal-content" class="glass-panel p-8 max-w-2xl w-full m-4 rounded-lg relative max-h-[90vh] overflow-y-auto">
+            <button id="modal-close-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <h2 id="modal-title" class="text-3xl font-bold text-sky-300 text-glow mb-4"></h2>
+            <p id="modal-description" class="text-gray-300 mb-6"></p>
+            <h3 class="text-xl font-semibold text-sky-400 mb-3">Key Features</h3>
+            <ul id="modal-features" class="list-disc list-inside text-gray-300 space-y-2">
+            </ul>
+        </div>
+    </div>
+
+
+    <script>
+        // Starfield Canvas Animation
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const stars = [];
+        const numStars = 200;
+
+        for (let i = 0; i < numStars; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 1.5 + 0.5,
+                alpha: Math.random(),
+                speed: Math.random() * 0.5 + 0.1
+            });
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
+                ctx.fillStyle = `rgba(224, 224, 224, ${star.alpha})`;
+                ctx.fill();
+
+                star.y += star.speed;
+                if (star.y > canvas.height) {
+                    star.y = 0;
+                    star.x = Math.random() * canvas.width;
+                }
+            });
+            requestAnimationFrame(drawStars);
+        }
+        drawStars();
+
+        // Scroll Reveal Animation
+        const scrollElements = document.querySelectorAll('.scroll-reveal');
+
+        const elementInView = (el, dividend = 1) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return (
+                elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
+            );
+        };
+
+        const displayScrollElement = (element) => {
+            element.classList.add('visible');
+        };
+        
+        const handleScrollAnimation = () => {
+            scrollElements.forEach((el) => {
+                if (elementInView(el, 1.25)) {
+                    displayScrollElement(el);
+                } 
+            })
+        }
+
+        window.addEventListener('scroll', handleScrollAnimation);
+        handleScrollAnimation();
+
+        // Modal Logic
+        const projectData = {
+            blogvox: {
+                title: "🚀 Blogvox",
+                description: "This application revolutionizes content creation by allowing users to effortlessly convert spoken words into structured blog posts. By leveraging the browser's built-in Web Speech API, it captures audio in real-time and transcribes it into text. The system then intelligently formats this text into a coherent article with headings and key points, which can be previewed, edited, and exported as a professional PDF document.",
+                features: [
+                    "Real-time voice-to-text transcription.",
+                    "Automated content structuring (headings, paragraphs).",
+                    "Client-side processing for speed and privacy.",
+                    "One-click PDF export for easy sharing and archiving."
+                ]
+            },
+            bikeRentals: {
+                title: "🚀 Bike Rentals",
+                description: "A community-driven marketplace connecting bike owners with individuals looking for a temporary ride. This peer-to-peer platform enables users to list their own bikes for rent, setting their own prices and availability. Renters can browse local listings, view bike details, and book a ride through a simple, intuitive interface, fostering a sustainable and community-focused mode of transport.",
+                features: [
+                    "User account creation and management for owners and renters.",
+                    "Intuitive interface for listing bikes with photos and descriptions.",
+                    "Search and filtering system for finding available bikes.",
+                    "A platform for direct user-to-user interaction and transaction."
+                ]
+            },
+            billingPage: {
+                title: "🚀 Billing Page",
+                description: "A lightweight, efficient point-of-sale (POS) solution designed for small businesses and freelancers. This tool simplifies the invoicing process by allowing users to quickly input customer details, add items with price and quantity, and instantly generate a formatted bill. The application dynamically calculates totals, taxes, and discounts, offering options to either print a physical copy or save the invoice as a PDF.",
+                features: [
+                    "Dynamic item entry with automatic total calculation.",
+                    "Simple customer information management.",
+                    "Print-friendly bill formatting.",
+                    "Generate and download invoices as PDF files."
+                ]
+            },
+            typingGame: {
+                title: "🚀 Typing Game",
+                description: "An engaging browser game designed to boost typing speed and accuracy. Words cascade down the screen, and the player must correctly type them before they disappear off the bottom. The game tracks performance metrics like Words Per Minute (WPM) and accuracy, providing a fun and competitive way to practice and improve essential keyboarding skills through fast-paced, interactive gameplay.",
+                features: [
+                    "Dynamic word generation for endless replayability.",
+                    "Real-time input validation and scoring.",
+                    "Speed and accuracy tracking (WPM).",
+                    "Increasing difficulty to challenge players."
+                ]
+            },
+            newWay: {
+                title: "🚀 New Way",
+                description: "A next-generation interview platform that leverages AI to streamline the hiring process. It provides a robust environment for real-time audio and video calls between HR professionals and candidates. For candidates, an AI Resume Enhancer suggests improvements based on the job description. For HR, an AI Question Generator creates relevant, insightful questions based on the candidate's resume, ensuring a more effective and data-driven interview.",
+                features: [
+                    "High-quality, real-time audio/video communication using WebRTC.",
+                    "AI-powered resume analysis and enhancement suggestions.",
+                    "Automated generation of interview questions tailored to the candidate.",
+                    "A collaborative space for a more modern interview experience."
+                ]
+            }
+        };
+
+        const projectCards = document.querySelectorAll('.project-card');
+        const modal = document.getElementById('project-modal');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+        const modalFeatures = document.getElementById('modal-features');
+
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const projectId = card.dataset.project;
+                const data = projectData[projectId];
+
+                if (data) {
+                    modalTitle.textContent = data.title;
+                    modalDescription.textContent = data.description;
+                    modalFeatures.innerHTML = ''; // Clear previous features
+                    data.features.forEach(feature => {
+                        const li = document.createElement('li');
+                        li.textContent = feature;
+                        modalFeatures.appendChild(li);
+                    });
+                    modal.classList.add('open');
+                }
+            });
+        });
+
+        function closeModal() {
+            modal.classList.remove('open');
+        }
+
+        modalCloseBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
+
